@@ -2,6 +2,8 @@ import os
 import markdown2
 
 def normalize_path(path):
+    # Remove surrounding quotes if present
+    path = path.strip('"\'')
     return os.path.normpath(path)
 
 def files_to_markdown(folder_path, output_file):
@@ -14,22 +16,22 @@ def files_to_markdown(folder_path, output_file):
         file_count = 0
         dir_count = 0
         for root, dirs, files in os.walk(folder_path):
-            level = root.replace(folder_path, '').count(os.sep)
-            indent = ' ' * 4 * level
+            level = len(os.path.relpath(root, folder_path).split(os.sep))
+            indent = ' ' * 4 * (level - 1)
             dir_name = os.path.basename(root)
-            print(f"{indent}Processing directory: {dir_name} (depth: {level})")
+            print(f"{indent}Processing directory: {dir_name} (depth: {level - 1})")
             dir_count += 1
             
-            outfile.write(f"{'#' * (level + 1)} {dir_name}\n\n")
+            outfile.write(f"{'#' * level} {dir_name}\n\n")
             
-            subindent = ' ' * 4 * (level + 1)
+            subindent = ' ' * 4 * level
             for file in files:
                 file_path = os.path.join(root, file)
                 relative_path = os.path.relpath(file_path, folder_path)
                 
                 print(f"{subindent}Processing file: {file}")
                 
-                outfile.write(f"{'#' * (level + 2)} {file}\n\n")
+                outfile.write(f"{'#' * (level + 1)} {file}\n\n")
                 
                 try:
                     with open(file_path, 'r', encoding='utf-8') as infile:
