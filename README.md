@@ -1,4 +1,4 @@
-# Directory Structure to Markdown Script
+# Folder to Markdown Converter 
 
 This Python script generates a Markdown file that represents the directory structure of a specified folder. It can include the content of the files or just the structure, depending on the user's choice.
 
@@ -19,7 +19,7 @@ This Python script generates a Markdown file that represents the directory struc
 
 1. Run the script:
    ```
-   python script_name.py
+   python 
    ```
 
 2. Follow the prompts:
