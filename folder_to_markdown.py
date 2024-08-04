@@ -74,25 +74,25 @@ def generate_output_filename(folder_path, include_content, user_filename=''):
     return os.path.join(os.path.dirname(folder_path), output_file)
 
 if __name__ == "__main__":
-    folder_path = input("フォルダのパスを入力してください: ").strip()
+    folder_path = input("Enter the path of the folder to process: ").strip()
     folder_path = normalize_path(folder_path)
     
-    output_file = input("出力するMarkdownファイルの名前を入力してください（空欄の場合は自動生成）: ").strip()
+    output_file = input("Enter the name of the output Markdown file (leave blank for auto-naming): ").strip()
     
-    print("\n出力オプションを選択してください:")
-    print("1. ファイル内容を含むバージョンを作成")
-    print("2. ファイル内容を含まないバージョン（構造のみ）を作成")
-    print("3. 両方のバージョンを作成")
-    choice = input("選択肢を入力してください (1/2/3): ").strip()
+    print("\nChoose output option:")
+    print("1. Create file with content")
+    print("2. Create file without content (structure only)")
+    print("3. Create both versions")
+    choice = input("Enter your choice (1/2/3): ").strip()
 
     if choice == '1':
         output_file = generate_output_filename(folder_path, True, output_file)
         files_to_markdown(folder_path, output_file, True)
-        print(f"\n処理が完了しました。結果は {output_file} に保存されました。")
+        print(f"\nProcessing complete. Results saved to {output_file}")
     elif choice == '2':
         output_file = generate_output_filename(folder_path, False, output_file)
         files_to_markdown(folder_path, output_file, False)
-        print(f"\n処理が完了しました。結果は {output_file} に保存されました。")
+        print(f"\nProcessing complete. Results saved to {output_file}")
     elif choice == '3':
         output_file_with_content = generate_output_filename(folder_path, True, output_file)
         output_file_structure_only = generate_output_filename(folder_path, False, output_file)
@@ -100,8 +100,8 @@ if __name__ == "__main__":
         files_to_markdown(folder_path, output_file_with_content, True)
         files_to_markdown(folder_path, output_file_structure_only, False)
         
-        print(f"\n処理が完了しました。")
-        print(f"ファイル内容を含むバージョン: {output_file_with_content}")
-        print(f"構造のみのバージョン: {output_file_structure_only}")
+        print(f"\nProcessing complete.")
+        print(f"File with content saved to: {output_file_with_content}")
+        print(f"File without content saved to: {output_file_structure_only}")
     else:
-        print("無効な選択です。スクリプトを再実行し、1、2、または3を選択してください。")
+        print("Invalid choice. Please run the script again and choose 1, 2, or 3.")
