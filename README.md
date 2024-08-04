@@ -19,7 +19,7 @@ This Python script generates a Markdown file that represents the directory struc
 
 1. Run the script:
    ```
-   python 
+   python folder_to_markdown.py
    ```
 
 2. Follow the prompts:
