@@ -1,57 +1,61 @@
-# Folder to Markdown Converter
+# Directory Structure to Markdown Script
 
-This Python script combines the contents of all files in a specified folder (including subfolders) into a single Markdown file.
+This Python script generates a Markdown file that represents the directory structure of a specified folder. It can include the content of the files or just the structure, depending on the user's choice.
 
 ## Features
 
-- Recursively scans all files in the specified folder and its subfolders
-- Creates a single Markdown file containing the contents of all scanned files
-- Uses relative file paths as headers in the Markdown file
-- Preserves Markdown formatting for .md files
-- Wraps non-Markdown files in code blocks for better readability
-- Adds separators between different files for improved organization
+- Converts a directory structure to a Markdown file
+- Option to include or exclude file contents
+- Handles file reading errors gracefully
+- Generates a summary of processed directories and files
+- Allows custom naming of the output file
+- Provides options to create files with content, without content, or both
 
 ## Requirements
 
 - Python 3.x
-- markdown2 library (install with `pip install markdown2`)
 
 ## Usage
 
 1. Run the script:
    ```
-   python folder_to_markdown.py
+   python script_name.py
    ```
-2. When prompted, enter the path of the folder you want to process.
-3. Enter the desired name for the output Markdown file.
-4. The script will process all files and save the result in the specified output file.
 
-## Example
+2. Follow the prompts:
+   - Enter the path of the folder to process
+   - Enter the name of the output Markdown file (or leave blank for auto-naming)
+   - Choose the output option:
+     1. Create file with content
+     2. Create file without content (structure only)
+     3. Create both versions
 
-```
-Enter the path of the folder to process: /path/to/your/folder
-Enter the name of the output Markdown file: combined_output.md
-Processing complete. Results saved to combined_output.md.
-```
+## Functions
 
-## Notes
+### `normalize_path(path)`
+Normalizes the given path by removing surrounding quotes and using `os.path.normpath`.
 
-- This script is designed for text files. Processing folders with binary files may result in errors.
-- Be cautious when processing folders with a large number of files or very large files, as it may consume significant memory.
+### `files_to_markdown(folder_path, output_file, include_content=True)`
+Generates the Markdown file based on the directory structure.
 
-## Customization
+### `generate_output_filename(folder_path, include_content, user_filename='')`
+Generates an appropriate output filename based on user input and processing options.
 
-You can modify this script to suit your specific needs. Some potential modifications include:
+## Output
 
-- Filtering files based on extension
-- Adding more sophisticated error handling
-- Implementing file size limits
-- Customizing the formatting of different file types
+The script generates one or two Markdown files (depending on the chosen option) in the same directory as the processed folder. The files include:
 
-## License
+- A header with the name of the processed directory
+- The date and time of generation
+- A hierarchical representation of the directory structure
+- File contents (if the option is selected)
+- A summary of the total number of directories and files processed
 
-This script is provided under the MIT License. Feel free to use, modify, and distribute it as needed.
+## Error Handling
 
-## Contributing
+- The script checks if the specified folder exists
+- It handles file reading errors and includes error messages in the output
 
-Contributions, issues, and feature requests are welcome. Feel free to check [issues page](https://github.com/yourusername/folder-to-markdown/issues) if you want to contribute.
+## Note
+
+This script may take a considerable amount of time to run for large directories, especially when including file contents.
